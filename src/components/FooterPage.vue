@@ -77,6 +77,7 @@
 import { Options, Vue } from "vue-class-component";
 
 @Options({
+  name: "footer-page",
   props: {
     msg: String,
   },
@@ -89,7 +90,6 @@ export default class FooterPage extends Vue {
 <style scoped lang="scss">
 footer {
   background-color: #fcb800;
-  z-index: 1;
   padding: 50px 0;
   .footer-info {
     display: flex;

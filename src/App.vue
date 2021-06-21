@@ -61,4 +61,10 @@ $color-secondary: white;
 .text-secondary {
   color: $color-secondary;
 }
+
+@media (max-width: 576px) {
+  .container {
+    padding: 10px;
+  }
+}
 </style>

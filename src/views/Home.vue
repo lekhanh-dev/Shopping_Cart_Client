@@ -1,21 +1,16 @@
 <template>
-  <div></div>
+  <slide-image />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-
+import SlideImage from "@/components/SlideImage.vue";
 @Options({
   components: {
-    // HelloWorld,
+    SlideImage,
   },
 })
 export default class Home extends Vue {}
 </script>
 
-<style lang="scss" scoped>
-div {
-  height: 900px;
-  background-color: #f1f1f1;
-}
-</style>
+<style lang="scss" scoped></style>

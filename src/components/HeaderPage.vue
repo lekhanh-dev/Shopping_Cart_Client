@@ -45,12 +45,14 @@
       </div>
     </div>
   </header>
+  <div class="cache"></div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
 @Options({
+  name: "header-page",
   props: {
     msg: String,
   },
@@ -80,8 +82,11 @@ export default class HeaderPage extends Vue {
 </script>
 
 <style scoped lang="scss">
+.cache {
+  padding-top: 70px;
+}
 header {
-  z-index: 2;
+  z-index: 3;
   position: fixed;
   top: 0;
   left: 0;
