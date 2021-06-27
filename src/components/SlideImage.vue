@@ -10,6 +10,8 @@
         </button>
         <img
           class="image-left"
+          width="690"
+          height="300"
           :style="{
             left: images[selectedImageIndex].left + '%',
             transition: transitionCss,
@@ -19,6 +21,8 @@
         />
         <img
           class="image-right"
+          width="690"
+          height="300"
           :style="{
             left: images[imageNextIndex].left + '%',
             transition: transitionCss,
@@ -26,9 +30,6 @@
           :src="getLinkImage(images[imageNextIndex].name)"
           alt="image"
         />
-        <div class="ads">
-          <img :src="getLinkImage('ads.jpg')" alt="image" />
-        </div>
       </div>
 
       <div class="wrap-image-smail">
@@ -45,6 +46,14 @@
           <img :src="getLinkImage('image_smail4.jpg')" alt="image" />
         </div>
       </div>
+    </div>
+    <div class="ads">
+      <img
+        :src="getLinkImage('ads.jpg')"
+        alt="image"
+        width="100%"
+        height="73"
+      />
     </div>
   </div>
 </template>
@@ -142,14 +151,16 @@ export default class SlideImage extends Vue {}
 .slide-image {
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
   }
   .wrap-image {
     display: flex;
+    padding-bottom: 10px;
     .wrap-slide {
       flex: 66.66%;
       position: relative;
       overflow: hidden;
+      height: 377px;
       &:hover .btn {
         opacity: 1;
         visibility: visible;
@@ -158,7 +169,7 @@ export default class SlideImage extends Vue {}
         position: absolute;
         z-index: 2;
         top: 0;
-        bottom: 15%;
+        bottom: 0;
         outline: none;
         cursor: pointer;
         border: none;
@@ -190,19 +201,26 @@ export default class SlideImage extends Vue {}
       .image-right {
         left: 100%;
       }
-      .ads {
-        position: absolute;
-        bottom: 0;
-      }
     }
     .wrap-image-smail {
       flex: 33.33%;
       display: flex;
       flex-wrap: wrap;
+      box-sizing: border-box;
+      // padding-left: 10px;
       .wrap-image-smail-item {
         flex: 50%;
+        box-sizing: border-box;
+        padding-left: 10px;
+        &:nth-child(1),
+        &:nth-child(2) {
+          padding-bottom: 10px;
+        }
       }
     }
+  }
+  .ads {
+    height: 73px;
   }
 }
 @media (max-width: 992px) {

@@ -1,7 +1,9 @@
 <template>
-  <header-page />
-  <router-view />
-  <footer-page />
+  <HeaderPage />
+  <div class="wrap-router-view">
+    <router-view></router-view>
+  </div>
+  <FooterPage />
 </template>
 
 <script>
@@ -18,13 +20,16 @@ export default {
 <style lang="scss">
 body {
   margin: 0;
+  background-color: rgb(247, 247, 247);
 }
 
 ul {
   list-style: none;
   padding-left: 0;
 }
-
+a {
+  text-decoration: none;
+}
 #app {
   // font-family: Avenir, Helvetica, Arial, sans-serif;
   font-family: "Work Sans", sans-serif;
@@ -55,16 +60,19 @@ $color-primary: black;
 $color-secondary: white;
 
 .text-primary {
-  color: $color-primary;
+  color: $color-primary !important;
 }
 
 .text-secondary {
-  color: $color-secondary;
+  color: $color-secondary !important;
 }
 
 @media (max-width: 576px) {
   .container {
     padding: 10px;
   }
+}
+.wrap-router-view {
+  min-height: 100vh;
 }
 </style>

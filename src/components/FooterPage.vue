@@ -4,8 +4,8 @@
       <div class="row footer-info">
         <div class="col footer-item">
           <div class="logo">
-            <span class="text-primary">SHOP </span>
-            <span class="text-secondary">PHONE</span>
+            <span class="text-primary">TECH </span>
+            <span class="text-secondary">SHOP</span>
           </div>
           <p>800-2345-6789</p>
           <p>support@domain.com</p>

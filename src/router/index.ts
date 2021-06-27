@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -15,13 +14,21 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    // component: About,
   },
   {
     path: "/cart",
     name: "Cart",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Cart.vue"),
-  }
+  },
+  {
+    path: "/category/:categoryName/:categoryId/:categoryChildName/:categoryChildId",
+    name: "Category",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Category.vue"),
+    props: true,
+  },
 ];
 
 const router = createRouter({

@@ -5,8 +5,10 @@
         <i class="fas fa-bars"></i>
       </button>
       <div class="logo">
-        <span class="text-primary">SHOP </span>
-        <span class="text-secondary">PHONE</span>
+        <router-link :to="{ name: 'Home' }"
+          ><span class="text-primary"> TECH </span
+          ><span class="text-secondary">SHOP</span></router-link
+        >
       </div>
       <nav :class="{ 'open-menu': openMenu }">
         <button class="close" @click="closeNav">
@@ -14,18 +16,40 @@
         </button>
         <ul>
           <li>
-            Điện thoại
+            Danh mục sản phẩm
             <div class="nav-lv-2">
               <div class="wrap-nav-lv-2">
-                <ul v-for="(value, key) in listPhone" :key="key">
-                  <li v-for="phone in value" :key="phone">{{ phone }}</li>
+                <ul
+                  class="wrap-categoryParent"
+                  v-for="categoryParent in categories"
+                  :key="categoryParent.id"
+                >
+                  <span class="categoryParent">{{ categoryParent.name }}</span>
+
+                  <li
+                    v-for="categoryChild in categoryParent.list_child"
+                    :key="categoryChild.id"
+                  >
+                    <router-link
+                      :to="{
+                        name: 'Category',
+                        params: {
+                          categoryName: stringToSlug(categoryParent.name),
+                          categoryId: categoryParent.id,
+                          categoryChildName: stringToSlug(categoryChild.name),
+                          categoryChildId: categoryChild.id,
+                        },
+                      }"
+                      >{{ categoryChild.name }}</router-link
+                    >
+                  </li>
                 </ul>
               </div>
             </div>
           </li>
-          <li><a href="#">Mua cũ</a></li>
-          <li><a href="#">Trả góp</a></li>
+          <li><a href="#">Cửa hàng</a></li>
           <li><a href="#">Tin công nghệ</a></li>
+          <li><a href="#">Liên hệ</a></li>
         </ul>
       </nav>
       <div class="group-icon">
@@ -50,6 +74,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import axios from "axios";
 
 @Options({
   name: "header-page",
@@ -65,6 +90,8 @@ import { Options, Vue } from "vue-class-component";
         ["Điện thoại phổ thông"],
       ],
       openMenu: false,
+      domainName: "http://localhost:3000",
+      categories: [],
     };
   },
   methods: {
@@ -74,6 +101,21 @@ import { Options, Vue } from "vue-class-component";
     closeNav() {
       this.openMenu = false;
     },
+    stringToSlug(str: string) {
+      str = str.toLowerCase();
+      str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      str = str.replace(/[đĐ]/g, "d");
+      str = str.replace(/([^0-9a-z-\s])/g, "");
+      str = str.replace(/(\s+)/g, "-");
+      str = str.replace(/-+/g, "-");
+      str = str.replace(/^-+|-+$/g, "");
+      return str;
+    },
+  },
+  created() {
+    axios.get(`${this.domainName}/api/category`).then((response) => {
+      this.categories = response.data;
+    });
   },
 })
 export default class HeaderPage extends Vue {
@@ -155,15 +197,17 @@ header {
           transition: all 0.2s ease-out;
           .wrap-nav-lv-2 {
             display: flex;
-            width: 1200px;
+            width: 1160px;
             margin: 0 auto;
             padding: 20px 0;
             ul {
               padding-right: 50px;
               display: block;
               li {
-                padding: 10px 0;
+                padding-bottom: 5px;
+                padding-top: 0;
                 transition: all 0.3s ease-in-out;
+                margin-right: 0;
                 &:hover {
                   color: #fcb800;
                 }
@@ -215,12 +259,22 @@ header {
     }
   }
 }
+.categoryParent {
+  font-weight: 700;
+  font-size: 18px;
+  border-bottom: 1px solid rgb(92, 92, 92);
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.wrap-categoryParent {
+  width: 200px;
+}
 @media (max-width: 768px) {
   header {
     .container {
       padding: 20px;
       .menu {
-        display: block;
+        display: flex;
         padding: 0;
         cursor: pointer;
       }
